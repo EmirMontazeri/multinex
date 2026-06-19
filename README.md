@@ -224,3 +224,47 @@ Cite our work if Multinex is useful to your research.
 }
 ```
 
+## License
+
+Multinex is released for non-commercial research and educational use only.
+
+You may use, modify, and share this code for:
+
+- academic research
+
+- personal study
+
+- non-commercial experimentation
+
+- reproducibility and benchmarking
+
+- teaching and educational use
+
+Commercial use is not permitted without prior written permission.
+
+Commercial use includes, but is not limited to:
+
+- use by or for a for-profit company
+
+- integration into a commercial product or service
+
+- internal company research, prototyping, evaluation, or benchmarking
+
+- paid consulting or client work
+
+- SaaS/API deployment
+
+- use in a startup, product pipeline, or revenue-generating system
+
+- training, fine-tuning, or deploying models for commercial advantage
+
+Commercial access is available only through collaboration, partnership, or a separate written commercial license.
+
+For commercial collaboration, contact:
+
+Alex Brateanu  
+
+Email: albrateanu@gmail.com
+
+This repository is provided as research software. No warranty is provided.
+
