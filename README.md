@@ -150,6 +150,8 @@ data/
 
 Model weights are available under `pretrained_weights/`, and are contained within the repository due to their small file sizes (280 KB for Multinex, 20 KB for Multinex-Nano). These weights are Model Materials covered by the non-commercial license notice in [`pretrained_weights/README.md`](pretrained_weights/README.md) and [`MODEL_CARD.md`](MODEL_CARD.md).
 
+**Note:** No-reference checkpoints correspond to results reported in the updated ArXiv version, for models indicated with `_dagger` ($^\dagger$)
+
 ### Multinex
 
 ```bash
