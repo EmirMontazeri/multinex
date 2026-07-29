@@ -15,6 +15,7 @@
 </div>
 
 ### News
+- **28.07.2026:** No-reference scripts and improved checkpoints (indicated in filename by `_dagger`) now available! ArXiv paper also updated with the new values (indicated by $^\dagger$). Both Multinex and Multinex-Nano now clearly outperform prior work! 
 - **20.06.2026:** Clarified repository licensing and commercial-use terms. Multinex is source-available for non-commercial research and educational use under PolyForm Noncommercial 1.0.0; commercial use requires separate written permission.
 - **25.04.2026**: Model weights for object detection on ExDark are now available for download. Read `Detection/README.md` for more details.
 - **14.04.2026 :** [Pre-print](https://arxiv.org/abs/2604.10359), [code](https://github.com/albrateanu/multinex/), and [paper page](https://albrateanu.github.io/Multinex/) for **Multinex** (accepted at CVPR 2026) are released!
@@ -149,30 +150,38 @@ data/
 
 Model weights are available under `pretrained_weights/`, and are contained within the repository due to their small file sizes (280 KB for Multinex, 20 KB for Multinex-Nano). These weights are Model Materials covered by the non-commercial license notice in [`pretrained_weights/README.md`](pretrained_weights/README.md) and [`MODEL_CARD.md`](MODEL_CARD.md).
 
+**Note:** No-reference checkpoints correspond to results reported in the updated ArXiv version, for models indicated with `_dagger` ($^\dagger$)
+
 ### Multinex
 
 ```bash
 # LOL-v1
-python Enhancement/test.py --opt Options/Multinex_LOL-v1.yaml --weights pretrained_weights/Multinex_LOL-v1.pth --dataset LOL_v1
+python Enhancement/test.py --opt Options/Multinex_LOL-v1.yaml --weights pretrained_weights/Multinex_LOL-v1.pth --dataset LOL-v1
 
 # LOL-v2-real
-python Enhancement/test.py --opt Options/Multinex_LOL-v2-real.yaml --weights pretrained_weights/Multinex_LOL-v2_real.pth --dataset LOL_v2_real
+python Enhancement/test.py --opt Options/Multinex_LOL-v2-real.yaml --weights pretrained_weights/Multinex_LOL-v2-real.pth --dataset LOL-v2-real
 
 # LOL-v2-synthetic
-python Enhancement/test.py --opt Options/Multinex_LOL-v2-syn.yaml --weights pretrained_weights/Multinex_LOL-v2_syn.pth --dataset LOL_v2_synthetic
+python Enhancement/test.py --opt Options/Multinex_LOL-v2-synthetic.yaml --weights pretrained_weights/Multinex_LOL-v2-synthetic.pth --dataset LOL-v2-synthetic
+
+# No-reference Datasets
+python Enhancement/test_noref.py --opt Options/Multinex_LOL-v2-synthetic.yaml --weights pretrained_weights/Multinex_dagger_NoRef.pth --input_dirs data/DICM data/MEF data/NPE data/LIME --result_dir results/Multinex_NoRef
 ```
 
 ### Multinex-Nano
 
 ```bash
 # LOL-v1
-python Enhancement/test.py --opt Options/MultinexNano_LOL-v1.yaml --weights pretrained_weights/MultinexNano_LOL-v1.pth --dataset LOL_v1
+python Enhancement/test.py --opt Options/Multinex-Nano_LOL-v1.yaml --weights pretrained_weights/Multinex-Nano_LOL-v1.pth --dataset LOL-v1
 
 # LOL-v2-real
-python Enhancement/test.py --opt Options/MultinexNano_LOL-v2-real.yaml --weights pretrained_weights/MultinexNano_LOL-v2_real.pth --dataset LOL_v2_real
+python Enhancement/test.py --opt Options/Multinex-Nano_LOL-v2-real.yaml --weights pretrained_weights/Multinex-Nano_LOL-v2-real.pth --dataset LOL-v2-real
 
 # LOL-v2-synthetic
-python Enhancement/test.py --opt Options/MultinexNano_LOL-v2-synthetic.yaml --weights pretrained_weights/MultinexNano_LOL-v2_syn.pth --dataset LOL_v2_synthetic
+python Enhancement/test.py --opt Options/Multinex-Nano_LOL-v2-synthetic.yaml --weights pretrained_weights/Multinex-Nano_LOL-v2-synthetic.pth --dataset LOL-v2-synthetic
+
+# No-reference Datasets
+python Enhancement/test_noref.py --opt Options/Multinex-Nano_LOL-v2-synthetic.yaml --weights pretrained_weights/Multinex-Nano_dagger_NoRef.pth --input_dirs data/DICM data/MEF data/NPE data/LIME --result_dir results/Multinex-Nano_NoRef
 ```
 
 - #### Self-ensemble testing strategy
@@ -197,16 +206,16 @@ python -m basicsr.train --opt Options/Multinex_LOL-v1.yaml
 python -m basicsr.train --opt Options/Multinex_LOL-v2-real.yaml
 
 # Multinex on LOL-v2-synthetic
-python -m basicsr.train --opt Options/Multinex_LOL-v2-syn.yaml
+python -m basicsr.train --opt Options/Multinex_LOL-v2-synthetic.yaml
 
 # Multinex-Nano on LOL-v1
-python -m basicsr.train --opt Options/MultinexNano_LOL-v1.yaml
+python -m basicsr.train --opt Options/Multinex-Nano_LOL-v1.yaml
 
 # Multinex-Nano on LOL-v2-real
-python -m basicsr.train --opt Options/MultinexNano_LOL-v2-real.yaml
+python -m basicsr.train --opt Options/Multinex-Nano_LOL-v2-real.yaml
 
 # Multinex-Nano on LOL-v2-synthetic
-python -m basicsr.train --opt Options/MultinexNano_LOL-v2-synthetic.yaml
+python -m basicsr.train --opt Options/Multinex-Nano_LOL-v2-synthetic.yaml
 ```
 
 **Note:** For best results, use  `val.val_freq: 5` in the yaml configs under `Options/` directory.

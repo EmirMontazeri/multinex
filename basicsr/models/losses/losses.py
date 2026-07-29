@@ -2,7 +2,7 @@ import torch
 from torch import nn as nn
 from torch.nn import functional as F
 import numpy as np
-from pytorch_msssim import ssim, ms_ssim
+from pytorch_msssim import ms_ssim
 import torchvision.models as models
 
 from basicsr.models.losses.loss_util import weighted_loss
@@ -10,25 +10,21 @@ from basicsr.models.losses.loss_util import weighted_loss
 _reduction_modes = ['none', 'mean', 'sum']
 
 
-@weighted_loss   #把 l1_loss 作为 weighted_loss 的输入
+@weighted_loss
 def l1_loss(pred, target):
     return F.l1_loss(pred, target, reduction='none')
 
-
-@weighted_loss   #把 mse_loss 作为 weighted_loss 的输入
+@weighted_loss
 def mse_loss(pred, target):
     return F.mse_loss(pred, target, reduction='none')
 
 
-# @weighted_loss
-# def charbonnier_loss(pred, target, eps=1e-12):
-#     return torch.sqrt((pred - target)**2 + eps)
-
 class VGGPerceptualLoss(nn.Module):
-    def __init__(self, device):
+    def __init__(self):
         super().__init__()
         vgg = models.vgg19(weights=models.VGG19_Weights.IMAGENET1K_V1).features[:16]
-        self.loss_model = vgg.to(device).eval()
+        self.loss_model = vgg.eval()
+        
         for p in self.loss_model.parameters():
             p.requires_grad = False
 
@@ -51,7 +47,7 @@ class HybridLoss(nn.Module):
             print('not using MSE Loss')
         
         if w_perc != 0:
-            self.perceptual_loss_model = VGGPerceptualLoss(device='cuda')
+            self.perceptual_loss_model = None
         else:
             print('not using Perc Loss')
 
@@ -74,7 +70,7 @@ class HybridLoss(nn.Module):
         
         if self.w_perc != 0:
             if self.perceptual_loss_model is None:
-                self.perceptual_loss_model = VGGPerceptualLoss(y_true.device).to(y_true.device)
+                self.perceptual_loss_model = VGGPerceptualLoss().to(y_true.device)
             perc_l = self.perceptual_loss_model(y_true, y_pred)
             total_loss += self.w_perc*perc_l 
         
