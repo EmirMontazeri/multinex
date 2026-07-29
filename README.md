@@ -189,7 +189,7 @@ python Enhancement/test_noref.py --opt Options/Multinex-Nano_LOL-v2-synthetic.ya
 For stronger results, add `--self_ensemble` argument.
 
 ```bash
-python Enhancement/test.py --opt Options/Multinex_LOL-v1.yaml --weights pretrained_weights/Multinex_LOLv1.pth --dataset LOL_v1 --self_ensemble
+python Enhancement/test.py --opt Options/Multinex_LOL-v1.yaml --weights pretrained_weights/Multinex_LOL-v1.pth --dataset LOL_v1 --self_ensemble
 ```
 
 &nbsp;
